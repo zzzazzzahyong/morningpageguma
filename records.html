@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 
   <meta charset="UTF-8">
@@ -9,620 +10,2375 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>기록 - Morning Page 🍋</title>
+  <title>내 기록 🍋</title>
 
 
   <style>
+
+    /* =========================================
+       기본
+    ========================================= */
 
     * {
       box-sizing: border-box;
     }
 
+
+    html,
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont,
-        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-      background: #FFFBEA;
-      color: #3E3A2F;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+
+    body {
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Apple SD Gothic Neo",
+        "Noto Sans KR",
+        sans-serif;
+
+      background: #FFFBEA;
+
+      color: #3E3A2F;
+
     }
+
 
     button,
+    textarea,
     input {
       font-family: inherit;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 0 24px;
+
+    button {
+      cursor: pointer;
     }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+
+    /* =========================================
+       가운데 정렬
+    ========================================= */
+
+    .container {
+
+      width:
+        min(
+          1000px,
+          calc(100% - 48px)
+        );
+
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+
+
+
+    /* =========================================
+       헤더
+    ========================================= */
 
     header {
+
+      width: 100%;
+
       height: 80px;
-      border-bottom: 1px solid #F2E8B8;
+
       display: flex;
+
       align-items: center;
+
+      background: #FFFBEA;
+
+      border-bottom:
+        1px solid #F2E8B8;
+
     }
+
 
     .header-inner {
-      width: 100%;
+
+      width:
+        min(
+          1000px,
+          calc(100% - 48px)
+        );
+
+      margin-left: auto;
+      margin-right: auto;
+
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       align-items: center;
+
     }
+
 
     .logo {
+
       font-size: 22px;
+
       font-weight: 800;
+
       color: #5D552F;
+
+      white-space: nowrap;
+
     }
+
 
     nav {
+
       display: flex;
-      gap: 8px;
+
+      gap: 6px;
+
     }
+
 
     nav a {
-      padding: 10px 14px;
+
+      padding:
+        10px 14px;
+
       border-radius: 12px;
+
       font-size: 14px;
+
       color: #77705A;
+
     }
 
-    nav a:hover,
-    nav a.active {
-      background: #FFF3A8;
+
+    nav a:hover {
+
+      background:
+        #FFF3A8;
+
     }
+
+
+
+    /* =========================================
+       메인
+    ========================================= */
 
     main {
-      padding: 50px 0 70px;
+
+      padding:
+        55px 0 80px;
+
     }
+
 
     .page-title {
-      margin-bottom: 28px;
+
+      margin-bottom:
+        30px;
+
     }
 
-    .page-title p {
-      margin: 0 0 8px;
+
+    .page-title .small {
+
+      margin-bottom:
+        8px;
+
       font-size: 14px;
+
       color: #8C835F;
+
     }
+
 
     .page-title h1 {
+
       margin: 0;
-      font-size: 32px;
+
+      font-size: 34px;
+
+      letter-spacing: -1px;
+
+      color: #393522;
+
     }
 
-    .search-box {
-      background: white;
-      border: 1px solid #F0E7BE;
-      border-radius: 20px;
-      padding: 18px;
-      margin-bottom: 24px;
-      display: flex;
-      gap: 10px;
+
+    .page-title h1 span {
+
+      color:
+        #D7A900;
+
     }
 
-    .search-box input {
-      flex: 1;
-      border: none;
-      outline: none;
-      background: #FFFDF7;
-      border-radius: 13px;
-      padding: 14px;
-      font-size: 14px;
+
+
+    /* =========================================
+       기록 목록
+    ========================================= */
+
+    .records-container {
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap: 16px;
+
     }
 
-    .search-button {
-      border: none;
-      background: #F5D62F;
-      border-radius: 13px;
-      padding: 0 22px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #514711;
+
+    .record-card {
+
+      background:
+        #FFFFFF;
+
+      border:
+        1px solid #F0E7BE;
+
+      border-radius:
+        22px;
+
+      padding:
+        25px 27px;
+
+      box-shadow:
+        0 8px 30px
+        rgba(109, 91, 20, 0.05);
+
     }
 
-    .count {
-      font-size: 13px;
-      color: #91896F;
-      margin-bottom: 14px;
+
+    .record-top {
+
+      display:
+        flex;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-start;
+
+      gap: 20px;
+
     }
 
-    .record {
-      background: white;
-      border: 1px solid #F0E7BE;
-      border-radius: 22px;
-      padding: 26px;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 30px rgba(109, 91, 20, 0.04);
-    }
-
-    .record-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
 
     .record-date {
-      font-size: 14px;
-      color: #8B835F;
+
+      font-size:
+        14px;
+
+      color:
+        #8A825F;
+
+      margin-bottom:
+        9px;
+
     }
 
-    .record-mood {
-      font-size: 28px;
+
+    .record-icons {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap: 8px;
+
+      font-size:
+        21px;
+
     }
 
-    .record-weather {
-      display: inline-block;
-      background: #FFF8CF;
-      border-radius: 10px;
-      padding: 6px 10px;
-      margin-left: 8px;
-      font-size: 12px;
-      color: #77705A;
+
+    .record-content {
+
+      margin-top:
+        17px;
+
+      padding:
+        17px;
+
+      background:
+        #FFFDF8;
+
+      border-radius:
+        15px;
+
+      font-size:
+        14px;
+
+      line-height:
+        1.8;
+
+      color:
+        #514C3C;
+
+      white-space:
+        pre-wrap;
+
+      word-break:
+        break-word;
+
     }
 
-    .record h2 {
-      font-size: 18px;
-      margin: 0 0 12px;
+
+
+    /* =========================================
+       버튼
+    ========================================= */
+
+    .record-actions {
+
+      display:
+        flex;
+
+      gap: 7px;
+
+      flex-shrink: 0;
+
     }
 
-    .record p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.9;
-      color: #625E50;
-      white-space: pre-wrap;
+
+    .edit-button,
+    .delete-button {
+
+      border:
+        none;
+
+      border-radius:
+        10px;
+
+      padding:
+        9px 13px;
+
+      font-size:
+        12px;
+
     }
+
+
+    .edit-button {
+
+      background:
+        #FFF3A8;
+
+      color:
+        #62582C;
+
+    }
+
+
+    .edit-button:hover {
+
+      background:
+        #FFE77A;
+
+    }
+
+
+    .delete-button {
+
+      background:
+        #F8F3E1;
+
+      color:
+        #8B8062;
+
+    }
+
+
+    .delete-button:hover {
+
+      background:
+        #F0E6C8;
+
+    }
+
+
+
+    /* =========================================
+       기록 없음
+    ========================================= */
 
     .empty {
-      background: white;
-      border: 1px solid #F0E7BE;
-      border-radius: 20px;
-      padding: 50px;
-      text-align: center;
-      color: #999;
+
+      padding:
+        70px 20px;
+
+      background:
+        #FFFFFF;
+
+      border:
+        1px solid #F0E7BE;
+
+      border-radius:
+        22px;
+
+      text-align:
+        center;
+
+      color:
+        #9B9377;
+
+      line-height:
+        1.8;
+
     }
 
-    @media (max-width: 760px) {
+
+
+    /* =========================================
+       로딩
+    ========================================= */
+
+    .loading {
+
+      padding:
+        60px 20px;
+
+      text-align:
+        center;
+
+      color:
+        #9B9377;
+
+    }
+
+
+
+    /* =========================================
+       수정 모달
+    ========================================= */
+
+    .modal-background {
+
+      position:
+        fixed;
+
+      inset:
+        0;
+
+      background:
+        rgba(62, 58, 47, 0.35);
+
+      display:
+        none;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        20px;
+
+      z-index:
+        1000;
+
+    }
+
+
+    .modal-background.show {
+
+      display:
+        flex;
+
+    }
+
+
+    .modal {
+
+      width:
+        min(
+          560px,
+          100%
+        );
+
+      max-height:
+        90vh;
+
+      overflow-y:
+        auto;
+
+      background:
+        #FFFFFF;
+
+      border-radius:
+        24px;
+
+      padding:
+        28px;
+
+      box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.15);
+
+    }
+
+
+    .modal-title {
+
+      margin:
+        0 0 24px;
+
+      font-size:
+        21px;
+
+      color:
+        #403C2D;
+
+    }
+
+
+    .form-title {
+
+      margin:
+        20px 0 10px;
+
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+
+      color:
+        #514B37;
+
+    }
+
+
+    .date-input {
+
+      width:
+        100%;
+
+      padding:
+        13px;
+
+      border:
+        1px solid #EEE7CA;
+
+      border-radius:
+        12px;
+
+      background:
+        #FFFDF8;
+
+      outline:
+        none;
+
+      color:
+        #514C3C;
+
+    }
+
+
+    .date-input:focus {
+
+      border-color:
+        #E5C82F;
+
+    }
+
+
+
+    /* =========================================
+       수정 - 날씨
+    ========================================= */
+
+    .weather-list {
+
+      display:
+        flex;
+
+      flex-wrap:
+        wrap;
+
+      gap:
+        7px;
+
+    }
+
+
+    .weather {
+
+      width:
+        61px;
+
+      height:
+        61px;
+
+      padding:
+        0;
+
+      border:
+        1px solid #EEE7CA;
+
+      background:
+        #FFFDF5;
+
+      border-radius:
+        15px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      font-size:
+        10px;
+
+      color:
+        #77705A;
+
+    }
+
+
+    .weather-icon {
+
+      font-size:
+        23px;
+
+      margin-bottom:
+        4px;
+
+    }
+
+
+    .weather.selected {
+
+      background:
+        #FFE45C;
+
+      border-color:
+        #E8C92C;
+
+      font-weight:
+        700;
+
+    }
+
+
+
+    /* =========================================
+       수정 - 기분
+    ========================================= */
+
+    .mood-list {
+
+      display:
+        flex;
+
+      gap:
+        7px;
+
+      flex-wrap:
+        wrap;
+
+    }
+
+
+    .mood {
+
+      width:
+        46px;
+
+      height:
+        46px;
+
+      padding:
+        0;
+
+      border:
+        1px solid #EEE7CA;
+
+      background:
+        #FFFDF5;
+
+      border-radius:
+        13px;
+
+      font-size:
+        21px;
+
+    }
+
+
+    .mood.selected {
+
+      background:
+        #FFE45C;
+
+      border-color:
+        #E8C92C;
+
+    }
+
+
+
+    /* =========================================
+       수정 - 내용
+    ========================================= */
+
+    .edit-content {
+
+      width:
+        100%;
+
+      min-height:
+        200px;
+
+      padding:
+        15px;
+
+      resize:
+        vertical;
+
+      border:
+        1px solid #EEE7CA;
+
+      border-radius:
+        15px;
+
+      background:
+        #FFFDF8;
+
+      color:
+        #514C3C;
+
+      font-size:
+        14px;
+
+      line-height:
+        1.8;
+
+      outline:
+        none;
+
+    }
+
+
+    .edit-content:focus {
+
+      border-color:
+        #E5C82F;
+
+    }
+
+
+
+    /* =========================================
+       모달 버튼
+    ========================================= */
+
+    .modal-actions {
+
+      display:
+        flex;
+
+      gap:
+        9px;
+
+      margin-top:
+        22px;
+
+    }
+
+
+    .cancel-button,
+    .save-edit-button {
+
+      flex:
+        1;
+
+      padding:
+        14px;
+
+      border:
+        none;
+
+      border-radius:
+        13px;
+
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+
+    }
+
+
+    .cancel-button {
+
+      background:
+        #F5F1E3;
+
+      color:
+        #77705A;
+
+    }
+
+
+    .save-edit-button {
+
+      background:
+        #F5D62F;
+
+      color:
+        #514711;
+
+    }
+
+
+    .save-edit-button:hover {
+
+      background:
+        #EBCB1E;
+
+    }
+
+
+    .save-edit-button:disabled {
+
+      opacity:
+        0.6;
+
+      cursor:
+        wait;
+
+    }
+
+
+
+    /* =========================================
+       모바일
+    ========================================= */
+
+    @media (max-width: 600px) {
+
+
+      .container {
+
+        width:
+          calc(100% - 32px);
+
+      }
+
+
+      .header-inner {
+
+        width:
+          calc(100% - 32px);
+
+      }
+
 
       header {
-        height: auto;
-        padding: 18px 0;
+
+        height:
+          auto;
+
+        padding:
+          17px 0;
+
       }
+
+
+      .logo {
+
+        font-size:
+          18px;
+
+      }
+
+
+      nav {
+
+        gap:
+          1px;
+
+      }
+
 
       nav a {
-        font-size: 12px;
-        padding: 8px;
+
+        padding:
+          7px 8px;
+
+        font-size:
+          11px;
+
       }
+
 
       main {
-        padding: 30px 0;
+
+        padding:
+          32px 0 55px;
+
       }
+
 
       .page-title h1 {
-        font-size: 27px;
+
+        font-size:
+          27px;
+
       }
 
-      .search-box {
-        padding: 12px;
+
+      .record-card {
+
+        padding:
+          20px;
+
       }
 
-      .search-button {
-        padding: 0 15px;
+
+      .record-top {
+
+        flex-direction:
+          column;
+
+        gap:
+          13px;
+
       }
 
-      .record {
-        padding: 20px;
+
+      .record-actions {
+
+        width:
+          100%;
+
+      }
+
+
+      .edit-button,
+      .delete-button {
+
+        flex:
+          1;
+
+      }
+
+
+      .modal {
+
+        padding:
+          22px;
+
+        border-radius:
+          20px;
+
       }
 
     }
+
 
   </style>
 
 </head>
 
 
+
 <body>
 
 
-<header>
+  <!-- ======================================
+       헤더
+  ======================================= -->
 
-  <div class="container header-inner">
+  <header>
 
-    <a href="index.html" class="logo">
-      🍋 Morning Page
-    </a>
+    <div class="header-inner">
 
-    <nav>
 
-      <a href="index.html">
-        오늘 쓰기
+      <a
+        href="index.html"
+        class="logo"
+      >
+        🍋 Morning Page
       </a>
 
-      <a href="calendar.html">
-        달력
-      </a>
 
-      <a href="records.html" class="active">
-        기록
-      </a>
+      <nav>
 
-    </nav>
+        <a href="index.html">
+          오늘 쓰기
+        </a>
 
-  </div>
+        <a href="calendar.html">
+          달력
+        </a>
 
-</header>
+        <a href="records.html">
+          기록
+        </a>
 
+      </nav>
 
-<main>
-
-  <div class="container">
-
-    <div class="page-title">
-
-      <p>MY MORNING PAGE</p>
-
-      <h1>
-        나의 기록들 📖
-      </h1>
 
     </div>
 
+  </header>
 
-    <!-- 검색 -->
 
-    <div class="search-box">
 
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="기록에서 찾고 싶은 단어를 검색해보세요."
+  <!-- ======================================
+       메인
+  ======================================= -->
+
+  <main>
+
+    <div class="container">
+
+
+      <section class="page-title">
+
+        <div class="small">
+          My Morning Pages
+        </div>
+
+
+        <h1>
+          나의 <span>기록</span>
+        </h1>
+
+      </section>
+
+
+
+      <section
+        id="recordsContainer"
+        class="records-container"
       >
 
-      <button
-        class="search-button"
-        id="searchButton"
-      >
-        검색
-      </button>
+        <div class="loading">
+          기록을 불러오는 중... 🍋
+        </div>
+
+      </section>
+
 
     </div>
 
-
-    <div
-      class="count"
-      id="count"
-    >
-      기록을 불러오는 중...
-    </div>
+  </main>
 
 
-    <div id="recordsContainer">
 
-      <div class="empty">
-        기록을 불러오는 중...
+  <!-- ======================================
+       수정 모달
+  ======================================= -->
+
+  <div
+    id="editModal"
+    class="modal-background"
+  >
+
+    <div class="modal">
+
+
+      <h2 class="modal-title">
+        기록 수정하기 🍋
+      </h2>
+
+
+
+      <!-- 날짜 -->
+
+      <div class="form-title">
+        날짜
       </div>
 
-    </div>
 
+      <input
+        type="date"
+        id="editDate"
+        class="date-input"
+      >
+
+
+
+      <!-- 날씨 -->
+
+      <div class="form-title">
+        날씨
+      </div>
+
+
+      <div
+        id="editWeatherList"
+        class="weather-list"
+      >
+
+
+        <button
+          type="button"
+          class="weather"
+          data-weather="☀️ 맑음"
+        >
+
+          <span class="weather-icon">
+            ☀️
+          </span>
+
+          맑음
+
+        </button>
+
+
+        <button
+          type="button"
+          class="weather"
+          data-weather="🌤️ 구름 조금"
+        >
+
+          <span class="weather-icon">
+            🌤️
+          </span>
+
+          구름 조금
+
+        </button>
+
+
+        <button
+          type="button"
+          class="weather"
+          data-weather="⛅ 흐림"
+        >
+
+          <span class="weather-icon">
+            ⛅
+          </span>
+
+          흐림
+
+        </button>
+
+
+        <button
+          type="button"
+          class="weather"
+          data-weather="🌧️ 비"
+        >
+
+          <span class="weather-icon">
+            🌧️
+          </span>
+
+          비
+
+        </button>
+
+
+        <button
+          type="button"
+          class="weather"
+          data-weather="⛈️ 소나기"
+        >
+
+          <span class="weather-icon">
+            ⛈️
+          </span>
+
+          소나기
+
+        </button>
+
+
+        <button
+          type="button"
+          class="weather"
+          data-weather="❄️ 눈"
+        >
+
+          <span class="weather-icon">
+            ❄️
+          </span>
+
+          눈
+
+        </button>
+
+
+        <button
+          type="button"
+          class="weather"
+          data-weather="🌨️ 눈/비"
+        >
+
+          <span class="weather-icon">
+            🌨️
+          </span>
+
+          눈/비
+
+        </button>
+
+
+        <button
+          type="button"
+          class="weather"
+          data-weather="🌫️ 안개"
+        >
+
+          <span class="weather-icon">
+            🌫️
+          </span>
+
+          안개
+
+        </button>
+
+
+      </div>
+
+
+
+      <!-- 기분 -->
+
+      <div class="form-title">
+        기분
+      </div>
+
+
+      <div
+        id="editMoodList"
+        class="mood-list"
+      >
+
+        <button
+          type="button"
+          class="mood"
+        >
+          😭
+        </button>
+
+        <button
+          type="button"
+          class="mood"
+        >
+          😣
+        </button>
+
+        <button
+          type="button"
+          class="mood"
+        >
+          😢
+        </button>
+
+        <button
+          type="button"
+          class="mood"
+        >
+          😞
+        </button>
+
+        <button
+          type="button"
+          class="mood"
+        >
+          😐
+        </button>
+
+        <button
+          type="button"
+          class="mood"
+        >
+          🙂
+        </button>
+
+        <button
+          type="button"
+          class="mood"
+        >
+          😊
+        </button>
+
+        <button
+          type="button"
+          class="mood"
+        >
+          😄
+        </button>
+
+        <button
+          type="button"
+          class="mood"
+        >
+          🤩
+        </button>
+
+      </div>
+
+
+
+      <!-- 내용 -->
+
+      <div class="form-title">
+        내용
+      </div>
+
+
+      <textarea
+        id="editContent"
+        class="edit-content"
+        placeholder="오늘의 생각을 적어주세요."
+      ></textarea>
+
+
+
+      <!-- 버튼 -->
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          id="cancelButton"
+          class="cancel-button"
+        >
+          취소
+        </button>
+
+
+        <button
+          type="button"
+          id="saveEditButton"
+          class="save-edit-button"
+        >
+          수정 저장
+        </button>
+
+      </div>
+
+
+    </div>
 
   </div>
 
-</main>
 
 
-<script>
+  <script>
 
 
-  const API_URL =
-    "https://script.google.com/macros/s/AKfycbwUo8rG3-Oi4dmg5gmwmil1rgMByuXf3VPEBpy308MFuy01gDEZLHJ3x8Qfuev8pTQUvQ/exec";
+    /* ======================================
+       Google Apps Script 주소
+    ======================================= */
+
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbwUo8rG3-Oi4dmg5gmwmil1rgMByuXf3VPEBpy308MFuy01gDEZLHJ3x8Qfuev8pTQUvQ/exec";
 
 
-  let allRecords = [];
+
+    /* ======================================
+       현재 수정 중인 기록
+    ======================================= */
+
+    let editingRecord = null;
 
 
-  /*
-   * Google 스프레드시트에서 기록을 불러옵니다.
-   */
-  async function loadRecords() {
-
-    try {
-
-      const response =
-        await fetch(API_URL);
-
-      const result =
-        await response.json();
+    let selectedWeather = "";
 
 
-      if (!result.success) {
-        throw new Error(result.error);
+    let selectedMood = "";
+
+
+
+    /* ======================================
+       기록 불러오기
+    ======================================= */
+
+    async function loadRecords() {
+
+
+      const container =
+        document.getElementById(
+          "recordsContainer"
+        );
+
+
+      try {
+
+
+        const response =
+          await fetch(API_URL);
+
+
+        const result =
+          await response.json();
+
+
+        if (!result.success) {
+
+          throw new Error(
+            result.error ||
+            "기록을 불러오지 못했습니다."
+          );
+
+        }
+
+
+        displayRecords(
+          result.data || []
+        );
+
+
+      } catch (error) {
+
+
+        console.error(error);
+
+
+        container.innerHTML =
+
+          `<div class="empty">
+            기록을 불러오지 못했습니다.<br>
+            잠시 후 다시 시도해주세요.
+          </div>`;
+
+      }
+
+    }
+
+
+
+    /* ======================================
+       기록 화면에 표시
+    ======================================= */
+
+    function displayRecords(
+      records
+    ) {
+
+
+      const container =
+        document.getElementById(
+          "recordsContainer"
+        );
+
+
+      if (
+        !records ||
+        records.length === 0
+      ) {
+
+
+        container.innerHTML =
+
+          `<div class="empty">
+            아직 작성한 기록이 없어요 🍋<br>
+            오늘의 첫 번째 모닝페이지를 작성해보세요.
+          </div>`;
+
+
+        return;
+
       }
 
 
-      allRecords =
-        result.data || [];
+
+      /*
+       * 최신 기록부터 표시
+       */
+
+      const reversed =
+        [...records].reverse();
 
 
-      displayRecords(allRecords);
-
-
-    } catch (error) {
-
-      console.error(error);
-
-      document.getElementById(
-        "recordsContainer"
-      ).innerHTML =
-        `<div class="empty">
-          기록을 불러오지 못했습니다.
-        </div>`;
-
-      document.getElementById(
-        "count"
-      ).textContent = "";
-
-    }
-
-  }
-
-
-  /*
-   * 기록을 화면에 표시합니다.
-   */
-  function displayRecords(records) {
-
-    const container =
-      document.getElementById(
-        "recordsContainer"
-      );
-
-
-    document.getElementById(
-      "count"
-    ).textContent =
-      `총 ${records.length}개의 기록`;
-
-
-    if (records.length === 0) {
 
       container.innerHTML =
-        `<div class="empty">
-          아직 작성한 기록이 없어요 🍋
-        </div>`;
+        reversed
+          .map(function(record) {
 
-      return;
+
+            return `
+
+              <article
+                class="record-card"
+              >
+
+                <div
+                  class="record-top"
+                >
+
+
+                  <div>
+
+                    <div
+                      class="record-date"
+                    >
+                      ${escapeHtml(
+                        formatDate(
+                          record.date
+                        )
+                      )}
+                    </div>
+
+
+                    <div
+                      class="record-icons"
+                    >
+
+                      <span>
+                        ${escapeHtml(
+                          record.mood || "😐"
+                        )}
+                      </span>
+
+                      <span>
+                        ${escapeHtml(
+                          record.weather || ""
+                        )}
+                      </span>
+
+                    </div>
+
+                  </div>
+
+
+
+                  <div
+                    class="record-actions"
+                  >
+
+                    <button
+                      type="button"
+                      class="edit-button"
+                      onclick="openEditModal(${record.row})"
+                    >
+                      수정
+                    </button>
+
+
+                    <button
+                      type="button"
+                      class="delete-button"
+                      onclick="deleteRecord(${record.row})"
+                    >
+                      삭제
+                    </button>
+
+                  </div>
+
+
+                </div>
+
+
+
+                <div
+                  class="record-content"
+                >
+                  ${escapeHtml(
+                    record.content || ""
+                  )}
+                </div>
+
+
+              </article>
+
+            `;
+
+          })
+          .join("");
 
     }
 
 
-    /*
-     * 최신 기록이 위로 오도록 뒤집습니다.
-     */
-    const sortedRecords =
-      [...records].reverse();
+
+    /* ======================================
+       날짜 표시
+    ======================================= */
+
+    function formatDate(
+      dateValue
+    ) {
 
 
-    container.innerHTML =
-      sortedRecords.map(function(record) {
+      if (!dateValue) {
 
-        return `
+        return "";
 
-          <article class="record">
-
-            <div class="record-header">
-
-              <div>
-
-                <span class="record-date">
-                  ${formatDate(record.date)}
-                </span>
-
-                <span class="record-weather">
-                  ${escapeHtml(record.weather || "")}
-                </span>
-
-              </div>
-
-              <div class="record-mood">
-                ${record.mood || "😐"}
-              </div>
-
-            </div>
+      }
 
 
-            <h2>
-              ${getTitle(record.content)}
-            </h2>
+      /*
+       * 이미 2026-08-30 형식이면
+       * 그대로 변환합니다.
+       */
+
+      const parts =
+        String(dateValue)
+          .split("-");
 
 
-            <p>
-              ${escapeHtml(record.content || "")}
-            </p>
-
-          </article>
-
-        `;
-
-      }).join("");
-
-  }
+      if (
+        parts.length === 3
+      ) {
 
 
-  /*
-   * 검색합니다.
-   */
-  function searchRecords() {
+        return `${parts[0]}년 ${Number(
+          parts[1]
+        )}월 ${Number(
+          parts[2]
+        )}일`;
 
-    const keyword =
-      document.getElementById(
-        "searchInput"
-      ).value
-        .trim()
-        .toLowerCase();
+      }
 
 
-    if (!keyword) {
-
-      displayRecords(allRecords);
-
-      return;
+      return dateValue;
 
     }
 
 
-    const filtered =
-      allRecords.filter(function(record) {
 
-        const content =
-          String(record.content || "")
-            .toLowerCase();
+    /* ======================================
+       수정 모달 열기
+    ======================================= */
 
-        const weather =
-          String(record.weather || "")
-            .toLowerCase();
-
-        const mood =
-          String(record.mood || "")
-            .toLowerCase();
-
-        const date =
-          String(record.date || "")
-            .toLowerCase();
+    async function openEditModal(
+      row
+    ) {
 
 
-        return (
-          content.includes(keyword) ||
-          weather.includes(keyword) ||
-          mood.includes(keyword) ||
-          date.includes(keyword)
+      try {
+
+
+        /*
+         * 최신 데이터를 다시 가져옵니다.
+         * 삭제/수정 직후 데이터가 꼬이는 것을 방지합니다.
+         */
+
+        const response =
+          await fetch(API_URL);
+
+
+        const result =
+          await response.json();
+
+
+        if (!result.success) {
+
+          throw new Error(
+            "기록을 불러오지 못했습니다."
+          );
+
+        }
+
+
+        const record =
+          result.data.find(
+            function(item) {
+
+              return Number(
+                item.row
+              ) === Number(row);
+
+            }
+          );
+
+
+        if (!record) {
+
+          alert(
+            "해당 기록을 찾을 수 없습니다."
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * 현재 수정 중인 기록 저장
+         */
+
+        editingRecord =
+          record;
+
+
+
+        /* 날짜 */
+
+        document.getElementById(
+          "editDate"
+        ).value =
+          convertToInputDate(
+            record.date
+          );
+
+
+
+        /* 날씨 */
+
+        selectedWeather =
+          record.weather || "";
+
+
+        document
+          .querySelectorAll(
+            "#editWeatherList .weather"
+          )
+          .forEach(function(button) {
+
+
+            button.classList.toggle(
+              "selected",
+              button.dataset.weather ===
+                selectedWeather
+            );
+
+          });
+
+
+
+        /* 기분 */
+
+        selectedMood =
+          record.mood || "";
+
+
+        document
+          .querySelectorAll(
+            "#editMoodList .mood"
+          )
+          .forEach(function(button) {
+
+
+            button.classList.toggle(
+              "selected",
+              button.textContent.trim() ===
+                selectedMood
+            );
+
+          });
+
+
+
+        /* 내용 */
+
+        document.getElementById(
+          "editContent"
+        ).value =
+          record.content || "";
+
+
+
+        /* 모달 열기 */
+
+        document
+          .getElementById(
+            "editModal"
+          )
+          .classList.add(
+            "show"
+          );
+
+
+      } catch (error) {
+
+
+        console.error(error);
+
+
+        alert(
+          "기록을 불러오지 못했습니다."
+        );
+
+      }
+
+    }
+
+
+
+    /* ======================================
+       날짜를 input date 형식으로 변환
+    ======================================= */
+
+    function convertToInputDate(
+      dateValue
+    ) {
+
+
+      if (!dateValue) {
+
+        return "";
+
+      }
+
+
+      /*
+       * 2026-08-30 형식
+       */
+
+      if (
+        /^\d{4}-\d{2}-\d{2}$/.test(
+          dateValue
+        )
+      ) {
+
+        return dateValue;
+
+      }
+
+
+      /*
+       * 2026. 8. 30.
+       * 같은 형식도 처리
+       */
+
+      const numbers =
+        String(dateValue)
+          .match(/\d+/g);
+
+
+      if (
+        numbers &&
+        numbers.length >= 3
+      ) {
+
+
+        return `${numbers[0]}-${String(
+          numbers[1]
+        ).padStart(2, "0")}-${String(
+          numbers[2]
+        ).padStart(2, "0")}`;
+
+      }
+
+
+      return "";
+
+    }
+
+
+
+    /* ======================================
+       날씨 선택
+    ======================================= */
+
+    document
+      .querySelectorAll(
+        "#editWeatherList .weather"
+      )
+      .forEach(function(button) {
+
+
+        button.addEventListener(
+          "click",
+          function() {
+
+
+            document
+              .querySelectorAll(
+                "#editWeatherList .weather"
+              )
+              .forEach(function(item) {
+
+                item.classList.remove(
+                  "selected"
+                );
+
+              });
+
+
+            button.classList.add(
+              "selected"
+            );
+
+
+            selectedWeather =
+              button.dataset.weather;
+
+          }
         );
 
       });
 
 
-    displayRecords(filtered);
 
-  }
+    /* ======================================
+       기분 선택
+    ======================================= */
 
-
-  /*
-   * 기록 내용의 첫 문장을 제목처럼 보여줍니다.
-   */
-  function getTitle(content) {
-
-    if (!content) {
-      return "제목 없는 기록";
-    }
+    document
+      .querySelectorAll(
+        "#editMoodList .mood"
+      )
+      .forEach(function(button) {
 
 
-    const firstLine =
-      String(content)
-        .split("\n")
-        .find(line => line.trim() !== "");
+        button.addEventListener(
+          "click",
+          function() {
 
 
-    if (!firstLine) {
-      return "제목 없는 기록";
-    }
+            document
+              .querySelectorAll(
+                "#editMoodList .mood"
+              )
+              .forEach(function(item) {
+
+                item.classList.remove(
+                  "selected"
+                );
+
+              });
 
 
-    return escapeHtml(
-      firstLine.trim().slice(0, 40)
-    );
-
-  }
+            button.classList.add(
+              "selected"
+            );
 
 
-  /*
-   * 날짜를 보기 좋은 형태로 표시합니다.
-   */
-  function formatDate(value) {
+            selectedMood =
+              button.textContent.trim();
 
-    if (!value) {
-      return "";
-    }
+          }
+        );
 
-
-    const date =
-      new Date(value);
+      });
 
 
-    if (isNaN(date.getTime())) {
-      return value;
-    }
+
+    /* ======================================
+       수정 저장
+    ======================================= */
+
+    async function saveEdit() {
 
 
-    return date.toLocaleDateString(
-      "ko-KR",
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
+      if (!editingRecord) {
+
+        return;
+
       }
-    );
-
-  }
 
 
-  /*
-   * HTML 특수문자를 안전하게 처리합니다.
-   */
-  function escapeHtml(value) {
-
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
-  }
+      const date =
+        document.getElementById(
+          "editDate"
+        ).value;
 
 
-  /*
-   * 검색 버튼을 클릭하면 검색합니다.
-   */
-  document
-    .getElementById("searchButton")
-    .addEventListener(
-      "click",
-      searchRecords
-    );
+      const content =
+        document.getElementById(
+          "editContent"
+        ).value.trim();
 
 
-  /*
-   * 검색창에서 Enter를 눌러도 검색합니다.
-   */
-  document
-    .getElementById("searchInput")
-    .addEventListener(
-      "keydown",
-      function(event) {
+      if (!date) {
 
-        if (event.key === "Enter") {
-          searchRecords();
+        alert(
+          "날짜를 선택해주세요."
+        );
+
+        return;
+
+      }
+
+
+      if (!content) {
+
+        alert(
+          "내용을 입력해주세요."
+        );
+
+        return;
+
+      }
+
+
+      if (!selectedWeather) {
+
+        alert(
+          "날씨를 선택해주세요."
+        );
+
+        return;
+
+      }
+
+
+      if (!selectedMood) {
+
+        alert(
+          "기분을 선택해주세요."
+        );
+
+        return;
+
+      }
+
+
+
+      const button =
+        document.getElementById(
+          "saveEditButton"
+        );
+
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "저장하는 중...";
+
+
+
+      try {
+
+
+        const response =
+          await fetch(
+            API_URL,
+            {
+
+              method:
+                "POST",
+
+              headers:
+                {
+                  "Content-Type":
+                    "text/plain"
+                },
+
+              body:
+                JSON.stringify({
+
+                  action:
+                    "update",
+
+                  row:
+                    editingRecord.row,
+
+                  date:
+                    date,
+
+                  weather:
+                    selectedWeather,
+
+                  mood:
+                    selectedMood,
+
+                  content:
+                    content
+
+                })
+
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if (!result.success) {
+
+          throw new Error(
+            result.error ||
+            "수정에 실패했습니다."
+          );
+
         }
 
+
+        alert(
+          "기록이 수정되었습니다 🍋"
+        );
+
+
+        closeEditModal();
+
+
+        await loadRecords();
+
+
+      } catch (error) {
+
+
+        console.error(error);
+
+
+        alert(
+          "수정하지 못했습니다."
+        );
+
+
+      } finally {
+
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "수정 저장";
+
       }
-    );
+
+    }
 
 
-  /*
-   * 페이지가 열리면 기록을 불러옵니다.
-   */
-  loadRecords();
+
+    /* ======================================
+       기록 삭제
+    ======================================= */
+
+    async function deleteRecord(
+      row
+    ) {
 
 
-</script>
+      const confirmed =
+        confirm(
+          "이 기록을 삭제할까요?\n\n삭제하면 다시 복구할 수 없습니다."
+        );
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+
+      try {
+
+
+        const response =
+          await fetch(
+            API_URL,
+            {
+
+              method:
+                "POST",
+
+              headers:
+                {
+                  "Content-Type":
+                    "text/plain"
+                },
+
+              body:
+                JSON.stringify({
+
+                  action:
+                    "delete",
+
+                  row:
+                    row
+
+                })
+
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if (!result.success) {
+
+          throw new Error(
+            result.error ||
+            "삭제에 실패했습니다."
+          );
+
+        }
+
+
+        alert(
+          "기록이 삭제되었습니다."
+        );
+
+
+        await loadRecords();
+
+
+      } catch (error) {
+
+
+        console.error(error);
+
+
+        alert(
+          "삭제하지 못했습니다."
+        );
+
+      }
+
+    }
+
+
+
+    /* ======================================
+       수정 모달 닫기
+    ======================================= */
+
+    function closeEditModal() {
+
+
+      document
+        .getElementById(
+          "editModal"
+        )
+        .classList.remove(
+          "show"
+        );
+
+
+      editingRecord =
+        null;
+
+    }
+
+
+
+    /* ======================================
+       취소 버튼
+    ======================================= */
+
+    document
+      .getElementById(
+        "cancelButton"
+      )
+      .addEventListener(
+        "click",
+        closeEditModal
+      );
+
+
+
+    /* ======================================
+       수정 저장 버튼
+    ======================================= */
+
+    document
+      .getElementById(
+        "saveEditButton"
+      )
+      .addEventListener(
+        "click",
+        saveEdit
+      );
+
+
+
+    /* ======================================
+       모달 바깥 클릭하면 닫기
+    ======================================= */
+
+    document
+      .getElementById(
+        "editModal"
+      )
+      .addEventListener(
+        "click",
+        function(event) {
+
+
+          if (
+            event.target ===
+            this
+          ) {
+
+            closeEditModal();
+
+          }
+
+        }
+      );
+
+
+
+    /* ======================================
+       HTML 특수문자 처리
+    ======================================= */
+
+    function escapeHtml(
+      value
+    ) {
+
+
+      return String(value)
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+
+    /* ======================================
+       페이지 시작
+    ======================================= */
+
+    loadRecords();
+
+
+  </script>
 
 </body>
+
 </html>
