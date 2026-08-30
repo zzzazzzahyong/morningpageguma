@@ -2,24 +2,46 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
 <title>Morning Page 🍋</title>
 
 <style>
+
+/* =========================
+   기본 설정
+========================= */
+
 * {
   box-sizing: border-box;
+  min-width: 0;
+}
+
+html {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
   margin: 0;
+
   background: #FFFBEA;
   color: #4A4635;
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Apple SD Gothic Neo",
     "Noto Sans KR",
     sans-serif;
+
+  overflow-x: hidden;
 }
 
 a {
@@ -31,52 +53,92 @@ button,
 input,
 textarea {
   font-family: inherit;
+  box-sizing: border-box;
 }
+
+
+/* =========================
+   헤더
+========================= */
 
 .header {
   width: 100%;
+  max-width: 100%;
+
   border-bottom: 1px solid #F1E7B8;
   background: #FFFBEA;
 }
 
 .header-inner {
   width: min(1000px, calc(100% - 40px));
+  max-width: 100%;
+
   height: 76px;
+
   margin: 0 auto;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  gap: 20px;
 }
 
 .logo {
+  flex-shrink: 0;
+
   font-size: 21px;
   font-weight: 800;
+
   color: #5C552F;
 }
 
 .nav {
   display: flex;
+  align-items: center;
+
   gap: 6px;
+
+  flex-shrink: 0;
 }
 
 .nav a {
   padding: 9px 13px;
+
   border-radius: 11px;
+
   font-size: 13px;
+
   color: #77705A;
+
+  white-space: nowrap;
 }
 
 .nav a:hover {
   background: #FFF1A8;
 }
 
+
+/* =========================
+   메인
+========================= */
+
 main {
   width: min(760px, calc(100% - 40px));
+  max-width: 100%;
+
   margin: 0 auto;
+
   padding: 55px 0 80px;
 }
 
+
+/* =========================
+   제목
+========================= */
+
 .title {
+  width: 100%;
   margin-bottom: 35px;
 }
 
@@ -87,27 +149,53 @@ main {
 
 .title h1 {
   margin: 8px 0 0;
+
   font-size: 34px;
+  line-height: 1.35;
+
   color: #3F3A29;
+
   letter-spacing: -1px;
+
+  word-break: keep-all;
 }
 
 .title h1 span {
   color: #D4A900;
 }
 
+
+/* =========================
+   카드
+========================= */
+
 .card {
+  width: 100%;
+  max-width: 100%;
+
   background: white;
+
   border: 1px solid #F0E7BE;
   border-radius: 24px;
+
   padding: 30px;
-  box-shadow: 0 10px 35px rgba(100, 85, 25, 0.05);
+
+  box-shadow:
+    0 10px 35px
+    rgba(100, 85, 25, 0.05);
 }
+
+
+/* =========================
+   항목 제목
+========================= */
 
 .label {
   margin: 23px 0 10px;
+
   font-size: 14px;
   font-weight: 700;
+
   color: #5D573F;
 }
 
@@ -115,86 +203,216 @@ main {
   margin-top: 0;
 }
 
+
+/* =========================
+   날짜
+========================= */
+
 .date {
+  display: block;
+
   width: 100%;
-  padding: 13px;
+  max-width: 100%;
+  min-width: 0;
+
+  height: 54px;
+
+  padding: 0 16px;
+
   border: 1px solid #EDE5C8;
-  border-radius: 12px;
+  border-radius: 16px;
+
   background: #FFFDF8;
+
   color: #514C3C;
+
   outline: none;
+
+  box-sizing: border-box;
+
+  -webkit-appearance: none;
+  appearance: none;
+
+  font-size: 16px;
+
+  text-align: center;
 }
 
-.weather-list,
-.mood-list {
+.date:focus {
+  border-color: #E4C72A;
+}
+
+
+/* =========================
+   날씨
+========================= */
+
+.weather-list {
+  width: 100%;
+  max-width: 100%;
+
   display: flex;
   flex-wrap: wrap;
+
   gap: 8px;
 }
 
 .weather {
   width: 70px;
   height: 67px;
+
+  flex: 0 0 70px;
+
   border: 1px solid #EDE5C8;
   border-radius: 15px;
+
   background: #FFFDF8;
+
   color: #77705A;
+
   font-size: 11px;
+
+  cursor: pointer;
+
+  padding: 0;
 }
 
 .weather span {
   display: block;
+
   font-size: 25px;
-  margin-bottom: 4px;
+
+  line-height: 1;
+
+  margin-bottom: 5px;
 }
 
-.weather.selected,
-.mood.selected {
+.weather.selected {
   background: #FFE45C;
   border-color: #E4C72A;
+}
+
+.weather:active {
+  transform: scale(.97);
+}
+
+
+/* =========================
+   기분
+========================= */
+
+.mood-list {
+  width: 100%;
+  max-width: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
 }
 
 .mood {
   width: 48px;
   height: 48px;
+
+  flex: 0 0 48px;
+
   border: 1px solid #EDE5C8;
   border-radius: 13px;
+
   background: #FFFDF8;
+
   font-size: 21px;
+
+  padding: 0;
+
+  cursor: pointer;
 }
 
-textarea {
-  width: 100%;
-  min-height: 300px;
-  padding: 17px;
-  resize: vertical;
-  border: 1px solid #EDE5C8;
-  border-radius: 16px;
-  background: #FFFDF8;
-  color: #514C3C;
-  line-height: 1.8;
-  outline: none;
-}
-
-textarea:focus,
-.date:focus {
+.mood.selected {
+  background: #FFE45C;
   border-color: #E4C72A;
 }
 
-.save {
+.mood:active {
+  transform: scale(.97);
+}
+
+
+/* =========================
+   내용
+========================= */
+
+textarea {
+  display: block;
+
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  min-height: 300px;
+
+  padding: 17px;
+
+  resize: vertical;
+
+  border: 1px solid #EDE5C8;
+  border-radius: 16px;
+
+  background: #FFFDF8;
+
+  color: #514C3C;
+
+  line-height: 1.8;
+
+  outline: none;
+
+  font-size: 15px;
+}
+
+textarea:focus {
+  border-color: #E4C72A;
+}
+
+textarea::placeholder {
+  color: #B2AB91;
+}
+
+
+/* =========================
+   저장 버튼
+========================= */
+
+.save {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
   margin-top: 22px;
+
   padding: 15px;
+
   border: none;
   border-radius: 14px;
+
   background: #F5D52F;
+
   color: #554B0C;
+
   font-size: 15px;
   font-weight: 800;
+
+  cursor: pointer;
 }
 
 .save:hover {
   background: #EAC91E;
+}
+
+.save:active {
+  transform: scale(.99);
 }
 
 .save:disabled {
@@ -202,78 +420,321 @@ textarea:focus,
   cursor: wait;
 }
 
+
+/* =========================
+   메시지
+========================= */
+
 .message {
+  width: 100%;
+
   text-align: center;
+
   margin-top: 15px;
+
   font-size: 13px;
+
   color: #8C835F;
 }
 
+
+/* =========================
+   모바일
+========================= */
+
 @media (max-width: 600px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+
+  /* 헤더 */
+
   .header-inner {
     width: calc(100% - 28px);
+
     height: 70px;
+
+    gap: 8px;
   }
 
   .logo {
     font-size: 17px;
   }
 
+  .nav {
+    gap: 1px;
+  }
+
   .nav a {
-    padding: 7px 7px;
+    padding: 7px 6px;
+
     font-size: 11px;
   }
 
+
+  /* 메인 */
+
   main {
     width: calc(100% - 28px);
+
     padding: 35px 0 55px;
+  }
+
+
+  /* 제목 */
+
+  .title {
+    margin-bottom: 30px;
+  }
+
+  .title small {
+    font-size: 12px;
   }
 
   .title h1 {
     font-size: 28px;
+
+    letter-spacing: -1.5px;
+
+    line-height: 1.4;
   }
 
+
+  /* 카드 */
+
   .card {
+    width: 100%;
+
     padding: 21px;
+
     border-radius: 20px;
   }
 
-  .weather {
-    width: 61px;
-    height: 61px;
+
+  /* 날짜 */
+
+  .date {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    height: 54px;
+
+    padding: 0 12px;
+
+    font-size: 16px;
+
+    text-align: center;
   }
+
+
+  /* 날씨 */
+
+  .weather-list {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  .weather {
+    width: 100%;
+    height: 68px;
+
+    min-width: 0;
+
+    flex: none;
+  }
+
+  .weather span {
+    font-size: 25px;
+  }
+
+
+  /* 기분 */
+
+  .mood-list {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(5, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  .mood {
+    width: 100%;
+    height: 52px;
+
+    min-width: 0;
+
+    flex: none;
+
+    font-size: 22px;
+  }
+
+
+  /* 내용 */
+
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    min-height: 280px;
+
+    padding: 15px;
+
+    font-size: 15px;
+  }
+
+
+  /* 저장 */
+
+  .save {
+    width: 100%;
+  }
+
 }
+
+
+/* =========================
+   아주 작은 화면
+========================= */
+
+@media (max-width: 380px) {
+
+  .header-inner {
+    width: calc(100% - 20px);
+  }
+
+  .logo {
+    font-size: 15px;
+  }
+
+  .nav a {
+    padding: 6px 4px;
+
+    font-size: 10px;
+  }
+
+  main {
+    width: calc(100% - 20px);
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .weather-list {
+    gap: 6px;
+  }
+
+  .mood-list {
+    gap: 6px;
+  }
+
+}
+
+
+/* =========================
+   날짜 입력창 아이폰 대응
+========================= */
+
+input[type="date"]::-webkit-date-and-time-value {
+  text-align: center;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  text-align: center;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  text-align: center;
+}
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =========================
+     헤더
+========================= -->
+
 <header class="header">
+
   <div class="header-inner">
 
-    <a href="index.html" class="logo">
+    <a
+      href="index.html"
+      class="logo"
+    >
       🍋 Morning Page
     </a>
 
+
     <nav class="nav">
-      <a href="index.html">오늘 쓰기</a>
-      <a href="calendar.html">달력</a>
-      <a href="records.html">기록</a>
+
+      <a href="index.html">
+        오늘 쓰기
+      </a>
+
+      <a href="calendar.html">
+        달력
+      </a>
+
+      <a href="records.html">
+        기록
+      </a>
+
     </nav>
 
   </div>
+
 </header>
+
+
+
+<!-- =========================
+     메인
+========================= -->
 
 <main>
 
+
   <div class="title">
-    <small>My Morning Pages</small>
-    <h1>오늘의 <span>마음</span>을 기록해요.</h1>
+
+    <small>
+      My Morning Pages
+    </small>
+
+    <h1>
+      오늘의 <span>마음</span>을 기록해요.
+    </h1>
+
   </div>
+
+
 
   <div class="card">
 
-    <div class="label">날짜</div>
+
+    <!-- 날짜 -->
+
+    <div class="label">
+      날짜
+    </div>
 
     <input
       type="date"
@@ -282,63 +743,190 @@ textarea:focus,
     >
 
 
-    <div class="label">오늘의 날씨</div>
+
+    <!-- 날씨 -->
+
+    <div class="label">
+      오늘의 날씨
+    </div>
 
     <div class="weather-list">
 
-      <button class="weather" data-weather="☀️ 맑음">
-        <span>☀️</span>맑음
+
+      <button
+        type="button"
+        class="weather"
+        data-weather="☀️ 맑음"
+      >
+        <span>☀️</span>
+        맑음
       </button>
 
-      <button class="weather" data-weather="🌤️ 구름 조금">
-        <span>🌤️</span>구름 조금
+
+      <button
+        type="button"
+        class="weather"
+        data-weather="🌤️ 구름 조금"
+      >
+        <span>🌤️</span>
+        구름 조금
       </button>
 
-      <button class="weather" data-weather="⛅ 흐림">
-        <span>⛅</span>흐림
+
+      <button
+        type="button"
+        class="weather"
+        data-weather="⛅ 흐림"
+      >
+        <span>⛅</span>
+        흐림
       </button>
 
-      <button class="weather" data-weather="🌧️ 비">
-        <span>🌧️</span>비
+
+      <button
+        type="button"
+        class="weather"
+        data-weather="🌧️ 비"
+      >
+        <span>🌧️</span>
+        비
       </button>
 
-      <button class="weather" data-weather="⛈️ 소나기">
-        <span>⛈️</span>소나기
+
+      <button
+        type="button"
+        class="weather"
+        data-weather="⛈️ 소나기"
+      >
+        <span>⛈️</span>
+        소나기
       </button>
 
-      <button class="weather" data-weather="❄️ 눈">
-        <span>❄️</span>눈
+
+      <button
+        type="button"
+        class="weather"
+        data-weather="❄️ 눈"
+      >
+        <span>❄️</span>
+        눈
       </button>
 
-      <button class="weather" data-weather="🌨️ 눈/비">
-        <span>🌨️</span>눈/비
+
+      <button
+        type="button"
+        class="weather"
+        data-weather="🌨️ 눈/비"
+      >
+        <span>🌨️</span>
+        눈/비
       </button>
 
-      <button class="weather" data-weather="🌫️ 안개">
-        <span>🌫️</span>안개
+
+      <button
+        type="button"
+        class="weather"
+        data-weather="🌫️ 안개"
+      >
+        <span>🌫️</span>
+        안개
       </button>
+
 
     </div>
 
 
-    <div class="label">오늘의 기분</div>
+
+    <!-- 기분 -->
+
+    <div class="label">
+      오늘의 기분
+    </div>
 
     <div class="mood-list">
 
-      <button class="mood">😭</button>
-      <button class="mood">😣</button>
-      <button class="mood">😢</button>
-      <button class="mood">😞</button>
-      <button class="mood">😐</button>
-      <button class="mood">🙂</button>
-      <button class="mood">😊</button>
-      <button class="mood">😄</button>
-      <button class="mood">🤩</button>
+
+      <button
+        type="button"
+        class="mood"
+      >
+        😭
+      </button>
+
+
+      <button
+        type="button"
+        class="mood"
+      >
+        😣
+      </button>
+
+
+      <button
+        type="button"
+        class="mood"
+      >
+        😢
+      </button>
+
+
+      <button
+        type="button"
+        class="mood"
+      >
+        😞
+      </button>
+
+
+      <button
+        type="button"
+        class="mood"
+      >
+        😐
+      </button>
+
+
+      <button
+        type="button"
+        class="mood"
+      >
+        🙂
+      </button>
+
+
+      <button
+        type="button"
+        class="mood"
+      >
+        😊
+      </button>
+
+
+      <button
+        type="button"
+        class="mood"
+      >
+        😄
+      </button>
+
+
+      <button
+        type="button"
+        class="mood"
+      >
+        🤩
+      </button>
+
 
     </div>
 
 
-    <div class="label">오늘의 생각</div>
+
+    <!-- 내용 -->
+
+    <div class="label">
+      오늘의 생각
+    </div>
 
     <textarea
       id="content"
@@ -346,212 +934,366 @@ textarea:focus,
     ></textarea>
 
 
+
+    <!-- 저장 -->
+
     <button
+      type="button"
       class="save"
       id="saveButton"
     >
       기록 저장하기 🍋
     </button>
 
+
     <div
       class="message"
       id="message"
     ></div>
+
 
   </div>
 
 </main>
 
 
+
 <script>
+
+
+/* =========================
+   Google Apps Script 주소
+========================= */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbxV18t2cg8rAPxhnWAm4rvCwyQHV3ODtkkFlmqLq_RyGDF1yd9TdKJhikpyxyFOW0xp/exec";
 
 
+/* =========================
+   선택값
+========================= */
+
 let selectedWeather = "";
 let selectedMood = "";
 
 
-/* 오늘 날짜 자동 입력 */
+/* =========================
+   오늘 날짜 자동 입력
+========================= */
+
 const today = new Date();
 
-const year = today.getFullYear();
+const year =
+  today.getFullYear();
 
 const month =
-String(today.getMonth() + 1)
-.padStart(2, "0");
+  String(
+    today.getMonth() + 1
+  ).padStart(2, "0");
 
 const day =
-String(today.getDate())
-.padStart(2, "0");
+  String(
+    today.getDate()
+  ).padStart(2, "0");
+
 
 document.getElementById("date").value =
-`${year}-${month}-${day}`;
+  `${year}-${month}-${day}`;
 
 
-/* 날씨 선택 */
+
+/* =========================
+   날씨 선택
+========================= */
 
 document
 .querySelectorAll(".weather")
 .forEach(button => {
 
-  button.addEventListener("click", () => {
+  button.addEventListener(
+    "click",
+    () => {
 
-    document
-    .querySelectorAll(".weather")
-    .forEach(item =>
-      item.classList.remove("selected")
-    );
 
-    button.classList.add("selected");
+      document
+      .querySelectorAll(".weather")
+      .forEach(item => {
 
-    selectedWeather =
-      button.dataset.weather;
+        item.classList.remove(
+          "selected"
+        );
 
-  });
+      });
+
+
+      button.classList.add(
+        "selected"
+      );
+
+
+      selectedWeather =
+        button.dataset.weather;
+
+    }
+  );
 
 });
 
 
-/* 기분 선택 */
+
+/* =========================
+   기분 선택
+========================= */
 
 document
 .querySelectorAll(".mood")
 .forEach(button => {
 
-  button.addEventListener("click", () => {
-
-    document
-    .querySelectorAll(".mood")
-    .forEach(item =>
-      item.classList.remove("selected")
-    );
-
-    button.classList.add("selected");
-
-    selectedMood =
-      button.textContent.trim();
-
-  });
-
-});
+  button.addEventListener(
+    "click",
+    () => {
 
 
-/* 저장 */
+      document
+      .querySelectorAll(".mood")
+      .forEach(item => {
 
-document
-.getElementById("saveButton")
-.addEventListener("click", async () => {
-
-  const date =
-    document.getElementById("date").value;
-
-  const content =
-    document.getElementById("content")
-    .value.trim();
-
-  const message =
-    document.getElementById("message");
-
-  const button =
-    document.getElementById("saveButton");
-
-
-  if (!date) {
-    alert("날짜를 선택해주세요.");
-    return;
-  }
-
-  if (!selectedWeather) {
-    alert("날씨를 선택해주세요.");
-    return;
-  }
-
-  if (!selectedMood) {
-    alert("기분을 선택해주세요.");
-    return;
-  }
-
-  if (!content) {
-    alert("오늘의 생각을 적어주세요.");
-    return;
-  }
-
-
-  button.disabled = true;
-  button.textContent = "저장하는 중...";
-
-
-  try {
-
-    const response =
-      await fetch(API_URL, {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "text/plain"
-        },
-
-        body: JSON.stringify({
-
-          action: "create",
-
-          date: date,
-
-          weather: selectedWeather,
-
-          mood: selectedMood,
-
-          content: content
-
-        })
+        item.classList.remove(
+          "selected"
+        );
 
       });
 
 
-    const result =
-      await response.json();
+      button.classList.add(
+        "selected"
+      );
 
 
-    if (!result.success) {
-      throw new Error(result.error);
+      selectedMood =
+        button.textContent.trim();
+
+    }
+  );
+
+});
+
+
+
+/* =========================
+   저장
+========================= */
+
+document
+.getElementById("saveButton")
+.addEventListener(
+  "click",
+  async () => {
+
+
+    const date =
+      document
+      .getElementById("date")
+      .value;
+
+
+    const content =
+      document
+      .getElementById("content")
+      .value
+      .trim();
+
+
+    const message =
+      document
+      .getElementById("message");
+
+
+    const button =
+      document
+      .getElementById("saveButton");
+
+
+
+    /* 날짜 확인 */
+
+    if (!date) {
+
+      alert(
+        "날짜를 선택해주세요."
+      );
+
+      return;
+
     }
 
 
-    message.textContent =
-      "기록이 저장되었어요 🍋";
+
+    /* 날씨 확인 */
+
+    if (!selectedWeather) {
+
+      alert(
+        "날씨를 선택해주세요."
+      );
+
+      return;
+
+    }
 
 
-    document.getElementById("content").value = "";
+
+    /* 기분 확인 */
+
+    if (!selectedMood) {
+
+      alert(
+        "기분을 선택해주세요."
+      );
+
+      return;
+
+    }
 
 
-    document
-    .querySelectorAll(".weather, .mood")
-    .forEach(item =>
-      item.classList.remove("selected")
-    );
+
+    /* 내용 확인 */
+
+    if (!content) {
+
+      alert(
+        "오늘의 생각을 적어주세요."
+      );
+
+      return;
+
+    }
 
 
-    selectedWeather = "";
-    selectedMood = "";
+
+    /* 저장 중 */
+
+    button.disabled = true;
+
+    button.textContent =
+      "저장하는 중...";
 
 
-  } catch (error) {
 
-    console.error(error);
+    try {
 
-    alert("저장하지 못했습니다.");
 
-  } finally {
+      const response =
+        await fetch(
+          API_URL,
+          {
 
-    button.disabled = false;
-    button.textContent = "기록 저장하기 🍋";
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "text/plain"
+            },
+
+            body:
+              JSON.stringify({
+
+                action: "create",
+
+                date: date,
+
+                weather:
+                  selectedWeather,
+
+                mood:
+                  selectedMood,
+
+                content:
+                  content
+
+              })
+
+          }
+        );
+
+
+
+      const result =
+        await response.json();
+
+
+
+      if (!result.success) {
+
+        throw new Error(
+          result.error ||
+          "저장에 실패했습니다."
+        );
+
+      }
+
+
+
+      /* 저장 완료 */
+
+      message.textContent =
+        "기록이 저장되었어요 🍋";
+
+
+      /* 내용 초기화 */
+
+      document
+      .getElementById("content")
+      .value = "";
+
+
+      /* 선택 초기화 */
+
+      document
+      .querySelectorAll(
+        ".weather, .mood"
+      )
+      .forEach(item => {
+
+        item.classList.remove(
+          "selected"
+        );
+
+      });
+
+
+      selectedWeather = "";
+      selectedMood = "";
+
+
+    } catch (error) {
+
+
+      console.error(
+        "저장 오류:",
+        error
+      );
+
+
+      alert(
+        "기록을 저장하지 못했어요.\n" +
+        "잠시 후 다시 시도해주세요."
+      );
+
+
+    } finally {
+
+
+      button.disabled = false;
+
+      button.textContent =
+        "기록 저장하기 🍋";
+
+
+    }
 
   }
-
-});
+);
 
 </script>
 
