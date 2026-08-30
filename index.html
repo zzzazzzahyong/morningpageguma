@@ -21,16 +21,16 @@
   min-width: 0;
 }
 
-html {
-  width: 100%;
-  overflow-x: hidden;
-}
-
+html,
 body {
   width: 100%;
   max-width: 100%;
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
+body {
   background: #FFFBEA;
   color: #4A4635;
 
@@ -40,13 +40,6 @@ body {
     "Apple SD Gothic Neo",
     "Noto Sans KR",
     sans-serif;
-
-  overflow-x: hidden;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
 }
 
 button,
@@ -56,6 +49,11 @@ textarea {
   box-sizing: border-box;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 
 /* =========================
    헤더
@@ -63,10 +61,8 @@ textarea {
 
 .header {
   width: 100%;
-  max-width: 100%;
-
-  border-bottom: 1px solid #F1E7B8;
   background: #FFFBEA;
+  border-bottom: 1px solid #F1E7B8;
 }
 
 .header-inner {
@@ -74,7 +70,6 @@ textarea {
   max-width: 100%;
 
   height: 76px;
-
   margin: 0 auto;
 
   display: flex;
@@ -96,9 +91,7 @@ textarea {
 .nav {
   display: flex;
   align-items: center;
-
   gap: 6px;
-
   flex-shrink: 0;
 }
 
@@ -208,37 +201,83 @@ main {
    날짜
 ========================= */
 
-.date {
-  display: block;
+.date-wrapper {
+  position: relative;
 
   width: 100%;
   max-width: 100%;
   min-width: 0;
 
-  height: 54px;
-
-  padding: 0 16px;
+  height: 58px;
 
   border: 1px solid #EDE5C8;
   border-radius: 16px;
 
   background: #FFFDF8;
 
+  overflow: hidden;
+}
+
+
+/* 화면에 보이는 날짜 */
+
+.date-display {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 16px;
+
   color: #514C3C;
 
-  outline: none;
+  font-size: 20px;
+  font-weight: 400;
 
-  box-sizing: border-box;
+  line-height: 1;
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+
+/* 실제 날짜 선택 input */
+
+.date-input {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+  z-index: 2;
 
   -webkit-appearance: none;
   appearance: none;
-
-  font-size: 16px;
-
-  text-align: center;
 }
 
-.date:focus {
+.date-wrapper:focus-within {
   border-color: #E4C72A;
 }
 
@@ -444,18 +483,9 @@ textarea::placeholder {
 
 @media (max-width: 600px) {
 
-  body {
-    overflow-x: hidden;
-  }
-
-
-  /* 헤더 */
-
   .header-inner {
     width: calc(100% - 28px);
-
     height: 70px;
-
     gap: 8px;
   }
 
@@ -469,7 +499,6 @@ textarea::placeholder {
 
   .nav a {
     padding: 7px 6px;
-
     font-size: 11px;
   }
 
@@ -513,18 +542,39 @@ textarea::placeholder {
   }
 
 
-  /* 날짜 */
+  /* =========================
+     모바일 날짜
+  ========================= */
 
-  .date {
+  .date-wrapper {
     width: 100%;
     max-width: 100%;
     min-width: 0;
 
-    height: 54px;
+    height: 58px;
 
-    padding: 0 12px;
+    border-radius: 16px;
+  }
 
-    font-size: 16px;
+  .date-display {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 10px;
+
+    font-size: 20px;
+
+    line-height: 1;
 
     text-align: center;
   }
@@ -622,7 +672,6 @@ textarea::placeholder {
 
   .nav a {
     padding: 6px 4px;
-
     font-size: 10px;
   }
 
@@ -646,7 +695,7 @@ textarea::placeholder {
 
 
 /* =========================
-   날짜 입력창 아이폰 대응
+   iPhone 날짜 대응
 ========================= */
 
 input[type="date"]::-webkit-date-and-time-value {
@@ -736,11 +785,24 @@ input[type="date"]::-webkit-datetime-edit-fields-wrapper {
       날짜
     </div>
 
-    <input
-      type="date"
-      id="date"
-      class="date"
-    >
+
+    <div class="date-wrapper">
+
+      <div
+        id="dateDisplay"
+        class="date-display"
+      >
+        2026. 8. 30.
+      </div>
+
+
+      <input
+        type="date"
+        id="date"
+        class="date-input"
+      >
+
+    </div>
 
 
 
@@ -749,6 +811,7 @@ input[type="date"]::-webkit-datetime-edit-fields-wrapper {
     <div class="label">
       오늘의 날씨
     </div>
+
 
     <div class="weather-list">
 
@@ -843,6 +906,7 @@ input[type="date"]::-webkit-datetime-edit-fields-wrapper {
       오늘의 기분
     </div>
 
+
     <div class="mood-list">
 
 
@@ -928,6 +992,7 @@ input[type="date"]::-webkit-datetime-edit-fields-wrapper {
       오늘의 생각
     </div>
 
+
     <textarea
       id="content"
       placeholder="아무 생각이나 자유롭게 적어보세요."
@@ -978,10 +1043,52 @@ let selectedMood = "";
 
 
 /* =========================
-   오늘 날짜 자동 입력
+   날짜 요소
 ========================= */
 
-const today = new Date();
+const dateInput =
+  document.getElementById("date");
+
+const dateDisplay =
+  document.getElementById("dateDisplay");
+
+
+/* =========================
+   날짜 표시 형식
+========================= */
+
+function formatDate(dateString) {
+
+  if (!dateString) {
+    return "";
+  }
+
+  const parts =
+    dateString.split("-");
+
+  if (parts.length !== 3) {
+    return dateString;
+  }
+
+  const year =
+    parts[0];
+
+  const month =
+    Number(parts[1]);
+
+  const day =
+    Number(parts[2]);
+
+  return `${year}. ${month}. ${day}.`;
+}
+
+
+/* =========================
+   오늘 날짜
+========================= */
+
+const today =
+  new Date();
 
 const year =
   today.getFullYear();
@@ -996,10 +1103,35 @@ const day =
     today.getDate()
   ).padStart(2, "0");
 
-
-document.getElementById("date").value =
+const todayString =
   `${year}-${month}-${day}`;
 
+
+/* 날짜 설정 */
+
+dateInput.value =
+  todayString;
+
+
+/* 날짜 화면 표시 */
+
+dateDisplay.textContent =
+  formatDate(todayString);
+
+
+/* =========================
+   날짜 변경
+========================= */
+
+dateInput.addEventListener(
+  "change",
+  function() {
+
+    dateDisplay.textContent =
+      formatDate(this.value);
+
+  }
+);
 
 
 /* =========================
@@ -1014,7 +1146,6 @@ document
     "click",
     () => {
 
-
       document
       .querySelectorAll(".weather")
       .forEach(item => {
@@ -1025,11 +1156,9 @@ document
 
       });
 
-
       button.classList.add(
         "selected"
       );
-
 
       selectedWeather =
         button.dataset.weather;
@@ -1038,7 +1167,6 @@ document
   );
 
 });
-
 
 
 /* =========================
@@ -1053,7 +1181,6 @@ document
     "click",
     () => {
 
-
       document
       .querySelectorAll(".mood")
       .forEach(item => {
@@ -1064,11 +1191,9 @@ document
 
       });
 
-
       button.classList.add(
         "selected"
       );
-
 
       selectedMood =
         button.textContent.trim();
@@ -1077,7 +1202,6 @@ document
   );
 
 });
-
 
 
 /* =========================
@@ -1090,12 +1214,8 @@ document
   "click",
   async () => {
 
-
     const date =
-      document
-      .getElementById("date")
-      .value;
-
+      dateInput.value;
 
     const content =
       document
@@ -1103,16 +1223,13 @@ document
       .value
       .trim();
 
-
     const message =
       document
       .getElementById("message");
 
-
     const button =
       document
       .getElementById("saveButton");
-
 
 
     /* 날짜 확인 */
@@ -1124,9 +1241,7 @@ document
       );
 
       return;
-
     }
-
 
 
     /* 날씨 확인 */
@@ -1138,9 +1253,7 @@ document
       );
 
       return;
-
     }
-
 
 
     /* 기분 확인 */
@@ -1152,9 +1265,7 @@ document
       );
 
       return;
-
     }
-
 
 
     /* 내용 확인 */
@@ -1166,9 +1277,7 @@ document
       );
 
       return;
-
     }
-
 
 
     /* 저장 중 */
@@ -1179,9 +1288,7 @@ document
       "저장하는 중...";
 
 
-
     try {
-
 
       const response =
         await fetch(
@@ -1200,7 +1307,8 @@ document
 
                 action: "create",
 
-                date: date,
+                date:
+                  date,
 
                 weather:
                   selectedWeather,
@@ -1217,10 +1325,8 @@ document
         );
 
 
-
       const result =
         await response.json();
-
 
 
       if (!result.success) {
@@ -1231,7 +1337,6 @@ document
         );
 
       }
-
 
 
       /* 저장 완료 */
@@ -1268,12 +1373,10 @@ document
 
     } catch (error) {
 
-
       console.error(
         "저장 오류:",
         error
       );
-
 
       alert(
         "기록을 저장하지 못했어요.\n" +
@@ -1283,12 +1386,10 @@ document
 
     } finally {
 
-
       button.disabled = false;
 
       button.textContent =
         "기록 저장하기 🍋";
-
 
     }
 
