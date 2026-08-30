@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>달력 - Morning Page 🍋</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: #FFFBEA;
+      color: #3E3A2F;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    header {
+      height: 80px;
+      border-bottom: 1px solid #F2E8B8;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-inner {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: #5D552F;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    nav a {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #77705A;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: #FFF3A8;
+      color: #514A29;
+    }
+
+    main {
+      padding: 50px 0 70px;
+    }
+
+    .page-title {
+      margin-bottom: 28px;
+    }
+
+    .page-title p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #8C835F;
+    }
+
+    .page-title h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .calendar-card {
+      background: white;
+      border: 1px solid #F0E7BE;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(109, 91, 20, 0.05);
+    }
+
+    .month-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .month-header h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .month-buttons {
+      display: flex;
+      gap: 7px;
+    }
+
+    .month-buttons button {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #EEE7CA;
+      background: #FFFDF5;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .weekdays,
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .weekday {
+      text-align: center;
+      padding: 12px 0;
+      font-size: 13px;
+      color: #8C835F;
+      font-weight: 700;
+    }
+
+    .day {
+      min-height: 105px;
+      border-top: 1px solid #F3EFDF;
+      border-right: 1px solid #F3EFDF;
+      padding: 10px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .day:nth-child(7n) {
+      border-right: none;
+    }
+
+    .day:hover {
+      background: #FFFDF1;
+    }
+
+    .day-number {
+      font-size: 13px;
+      color: #77715F;
+    }
+
+    .today .day-number {
+      background: #F5D62F;
+      color: #514711;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .mood {
+      font-size: 25px;
+      margin-top: 12px;
+    }
+
+    .weather-small {
+      font-size: 12px;
+      color: #918A75;
+      margin-top: 4px;
+    }
+
+    .empty {
+      background: #FFFEF8;
+      cursor: default;
+    }
+
+    .record-preview {
+      margin-top: 30px;
+      padding: 22px;
+      background: #FFF7C8;
+      border-radius: 18px;
+      line-height: 1.7;
+    }
+
+    .record-preview strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 50px 0;
+      color: #999;
+    }
+
+    @media (max-width: 760px) {
+
+      header {
+        height: auto;
+        padding: 18px 0;
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 8px;
+      }
+
+      main {
+        padding: 30px 0;
+      }
+
+      .calendar-card {
+        padding: 16px;
+      }
+
+      .day {
+        min-height: 75px;
+        padding: 6px;
+      }
+
+      .mood {
+        font-size: 20px;
+      }
+
+      .weather-small {
+        display: none;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+      🍋 Morning Page
+    </a>
+
+    <nav>
+      <a href="index.html">오늘 쓰기</a>
+      <a href="calendar.html" class="active">달력</a>
+      <a href="records.html">기록</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <div class="container">
+
+    <div class="page-title">
+      <p>MY MORNING PAGE</p>
+      <h1>나의 기록 달력 🗓️</h1>
+    </div>
+
+
+    <section class="calendar-card">
+
+      <div class="month-header">
+
+        <button
+          class="month-buttons"
+          onclick="changeMonth(-1)"
+        >
+          ‹ 이전
+        </button>
+
+        <h2 id="monthTitle"></h2>
+
+        <button
+          class="month-buttons"
+          onclick="changeMonth(1)"
+        >
+          다음 ›
+        </button>
+
+      </div>
+
+
+      <div class="weekdays">
+
+        <div class="weekday">일</div>
+        <div class="weekday">월</div>
+        <div class="weekday">화</div>
+        <div class="weekday">수</div>
+        <div class="weekday">목</div>
+        <div class="weekday">금</div>
+        <div class="weekday">토</div>
+
+      </div>
+
+
+      <div
+        class="calendar"
+        id="calendar"
+      >
+        <div class="loading">
+          기록을 불러오는 중...
+        </div>
+      </div>
+
+
+      <div
+        class="record-preview"
+        id="recordPreview"
+      >
+        날짜를 선택하면 해당 날짜의 기록이 여기에 표시됩니다.
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script>
+
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbwUo8rG3-Oi4dmg5gmwmil1rgMByuXf3VPEBpy308MFuy01gDEZLHJ3x8Qfuev8pTQUvQ/exec";
+
+
+  let records = [];
+
+  let currentDate = new Date();
+
+
+  /*
+   * 스프레드시트에서 기록을 불러옵니다.
+   */
+  async function loadRecords() {
+
+    try {
+
+      const response = await fetch(API_URL);
+
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+
+      records = result.data || [];
+
+      renderCalendar();
+
+    } catch (error) {
+
+      console.error(error);
+
+      document.getElementById("calendar").innerHTML =
+        `<div class="loading">
+          기록을 불러오지 못했습니다.
+        </div>`;
+
+    }
+
+  }
+
+
+  /*
+   * 현재 달의 달력을 만듭니다.
+   */
+  function renderCalendar() {
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    document.getElementById("monthTitle").textContent =
+      `${year}년 ${month + 1}월`;
+
+
+    const calendar =
+      document.getElementById("calendar");
+
+    calendar.innerHTML = "";
+
+
+    const firstDay =
+      new Date(year, month, 1).getDay();
+
+    const lastDate =
+      new Date(year, month + 1, 0).getDate();
+
+
+    for (let i = 0; i < firstDay; i++) {
+
+      const empty =
+        document.createElement("div");
+
+      empty.className = "day empty";
+
+      calendar.appendChild(empty);
+
+    }
+
+
+    for (let day = 1; day <= lastDate; day++) {
+
+      const cell =
+        document.createElement("div");
+
+      cell.className = "day";
+
+
+      const dateString =
+        `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+
+      const record =
+        findRecordByDate(dateString);
+
+
+      const number =
+        document.createElement("div");
+
+      number.className = "day-number";
+
+      number.textContent = day;
+
+
+      if (isToday(year, month, day)) {
+        cell.classList.add("today");
+      }
+
+
+      cell.appendChild(number);
+
+
+      if (record) {
+
+        const mood =
+          document.createElement("div");
+
+        mood.className = "mood";
+
+        mood.textContent =
+          record.mood || "😐";
+
+        cell.appendChild(mood);
+
+
+        const weather =
+          document.createElement("div");
+
+        weather.className =
+          "weather-small";
+
+        weather.textContent =
+          record.weather || "";
+
+        cell.appendChild(weather);
+
+
+        cell.addEventListener(
+          "click",
+          function() {
+            showRecord(record);
+          }
+        );
+
+      }
+
+
+      calendar.appendChild(cell);
+
+    }
+
+  }
+
+
+  /*
+   * 날짜가 오늘인지 확인합니다.
+   */
+  function isToday(year, month, day) {
+
+    const today = new Date();
+
+    return (
+      today.getFullYear() === year &&
+      today.getMonth() === month &&
+      today.getDate() === day
+    );
+
+  }
+
+
+  /*
+   * 특정 날짜의 기록을 찾습니다.
+   */
+  function findRecordByDate(dateString) {
+
+    return records.find(function(record) {
+
+      const date =
+        normalizeDate(record.date);
+
+      return date === dateString;
+
+    });
+
+  }
+
+
+  /*
+   * Apps Script에서 받은 날짜를 YYYY-MM-DD로 변환합니다.
+   */
+  function normalizeDate(value) {
+
+    if (!value) return "";
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+      return String(value).slice(0, 10);
+    }
+
+    return `${date.getFullYear()}-${String(
+      date.getMonth() + 1
+    ).padStart(2, "0")}-${String(
+      date.getDate()
+    ).padStart(2, "0")}`;
+
+  }
+
+
+  /*
+   * 선택한 기록을 아래쪽에 보여줍니다.
+   */
+  function showRecord(record) {
+
+    const preview =
+      document.getElementById("recordPreview");
+
+    preview.innerHTML = `
+      <strong>
+        ${record.mood || "😐"}
+        ${formatDate(record.date)}
+        ${record.weather || ""}
+      </strong>
+
+      ${escapeHtml(record.content || "")}
+    `;
+
+  }
+
+
+  /*
+   * 날짜를 보기 좋은 형태로 표시합니다.
+   */
+  function formatDate(value) {
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+      return value;
+    }
+
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+
+  }
+
+
+  /*
+   * HTML 특수문자를 처리합니다.
+   */
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /*
+   * 이전/다음 달로 이동합니다.
+   */
+  function changeMonth(amount) {
+
+    currentDate.setMonth(
+      currentDate.getMonth() + amount
+    );
+
+    renderCalendar();
+
+  }
+
+
+  loadRecords();
+
+</script>
+
+</body>
+</html>

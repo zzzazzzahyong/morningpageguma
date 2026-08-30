@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>기록 - Morning Page 🍋</title>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: #FFFBEA;
+      color: #3E3A2F;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    header {
+      height: 80px;
+      border-bottom: 1px solid #F2E8B8;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-inner {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: #5D552F;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    nav a {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #77705A;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: #FFF3A8;
+    }
+
+    main {
+      padding: 50px 0 70px;
+    }
+
+    .page-title {
+      margin-bottom: 28px;
+    }
+
+    .page-title p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #8C835F;
+    }
+
+    .page-title h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    .search-box {
+      background: white;
+      border: 1px solid #F0E7BE;
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: #FFFDF7;
+      border-radius: 13px;
+      padding: 14px;
+      font-size: 14px;
+    }
+
+    .search-button {
+      border: none;
+      background: #F5D62F;
+      border-radius: 13px;
+      padding: 0 22px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #514711;
+    }
+
+    .count {
+      font-size: 13px;
+      color: #91896F;
+      margin-bottom: 14px;
+    }
+
+    .record {
+      background: white;
+      border: 1px solid #F0E7BE;
+      border-radius: 22px;
+      padding: 26px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 30px rgba(109, 91, 20, 0.04);
+    }
+
+    .record-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .record-date {
+      font-size: 14px;
+      color: #8B835F;
+    }
+
+    .record-mood {
+      font-size: 28px;
+    }
+
+    .record-weather {
+      display: inline-block;
+      background: #FFF8CF;
+      border-radius: 10px;
+      padding: 6px 10px;
+      margin-left: 8px;
+      font-size: 12px;
+      color: #77705A;
+    }
+
+    .record h2 {
+      font-size: 18px;
+      margin: 0 0 12px;
+    }
+
+    .record p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.9;
+      color: #625E50;
+      white-space: pre-wrap;
+    }
+
+    .empty {
+      background: white;
+      border: 1px solid #F0E7BE;
+      border-radius: 20px;
+      padding: 50px;
+      text-align: center;
+      color: #999;
+    }
+
+    @media (max-width: 760px) {
+
+      header {
+        height: auto;
+        padding: 18px 0;
+      }
+
+      nav a {
+        font-size: 12px;
+        padding: 8px;
+      }
+
+      main {
+        padding: 30px 0;
+      }
+
+      .page-title h1 {
+        font-size: 27px;
+      }
+
+      .search-box {
+        padding: 12px;
+      }
+
+      .search-button {
+        padding: 0 15px;
+      }
+
+      .record {
+        padding: 20px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">
+      🍋 Morning Page
+    </a>
+
+    <nav>
+
+      <a href="index.html">
+        오늘 쓰기
+      </a>
+
+      <a href="calendar.html">
+        달력
+      </a>
+
+      <a href="records.html" class="active">
+        기록
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <div class="container">
+
+    <div class="page-title">
+
+      <p>MY MORNING PAGE</p>
+
+      <h1>
+        나의 기록들 📖
+      </h1>
+
+    </div>
+
+
+    <!-- 검색 -->
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="기록에서 찾고 싶은 단어를 검색해보세요."
+      >
+
+      <button
+        class="search-button"
+        id="searchButton"
+      >
+        검색
+      </button>
+
+    </div>
+
+
+    <div
+      class="count"
+      id="count"
+    >
+      기록을 불러오는 중...
+    </div>
+
+
+    <div id="recordsContainer">
+
+      <div class="empty">
+        기록을 불러오는 중...
+      </div>
+
+    </div>
+
+
+  </div>
+
+</main>
+
+
+<script>
+
+
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbwUo8rG3-Oi4dmg5gmwmil1rgMByuXf3VPEBpy308MFuy01gDEZLHJ3x8Qfuev8pTQUvQ/exec";
+
+
+  let allRecords = [];
+
+
+  /*
+   * Google 스프레드시트에서 기록을 불러옵니다.
+   */
+  async function loadRecords() {
+
+    try {
+
+      const response =
+        await fetch(API_URL);
+
+      const result =
+        await response.json();
+
+
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+
+
+      allRecords =
+        result.data || [];
+
+
+      displayRecords(allRecords);
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      document.getElementById(
+        "recordsContainer"
+      ).innerHTML =
+        `<div class="empty">
+          기록을 불러오지 못했습니다.
+        </div>`;
+
+      document.getElementById(
+        "count"
+      ).textContent = "";
+
+    }
+
+  }
+
+
+  /*
+   * 기록을 화면에 표시합니다.
+   */
+  function displayRecords(records) {
+
+    const container =
+      document.getElementById(
+        "recordsContainer"
+      );
+
+
+    document.getElementById(
+      "count"
+    ).textContent =
+      `총 ${records.length}개의 기록`;
+
+
+    if (records.length === 0) {
+
+      container.innerHTML =
+        `<div class="empty">
+          아직 작성한 기록이 없어요 🍋
+        </div>`;
+
+      return;
+
+    }
+
+
+    /*
+     * 최신 기록이 위로 오도록 뒤집습니다.
+     */
+    const sortedRecords =
+      [...records].reverse();
+
+
+    container.innerHTML =
+      sortedRecords.map(function(record) {
+
+        return `
+
+          <article class="record">
+
+            <div class="record-header">
+
+              <div>
+
+                <span class="record-date">
+                  ${formatDate(record.date)}
+                </span>
+
+                <span class="record-weather">
+                  ${escapeHtml(record.weather || "")}
+                </span>
+
+              </div>
+
+              <div class="record-mood">
+                ${record.mood || "😐"}
+              </div>
+
+            </div>
+
+
+            <h2>
+              ${getTitle(record.content)}
+            </h2>
+
+
+            <p>
+              ${escapeHtml(record.content || "")}
+            </p>
+
+          </article>
+
+        `;
+
+      }).join("");
+
+  }
+
+
+  /*
+   * 검색합니다.
+   */
+  function searchRecords() {
+
+    const keyword =
+      document.getElementById(
+        "searchInput"
+      ).value
+        .trim()
+        .toLowerCase();
+
+
+    if (!keyword) {
+
+      displayRecords(allRecords);
+
+      return;
+
+    }
+
+
+    const filtered =
+      allRecords.filter(function(record) {
+
+        const content =
+          String(record.content || "")
+            .toLowerCase();
+
+        const weather =
+          String(record.weather || "")
+            .toLowerCase();
+
+        const mood =
+          String(record.mood || "")
+            .toLowerCase();
+
+        const date =
+          String(record.date || "")
+            .toLowerCase();
+
+
+        return (
+          content.includes(keyword) ||
+          weather.includes(keyword) ||
+          mood.includes(keyword) ||
+          date.includes(keyword)
+        );
+
+      });
+
+
+    displayRecords(filtered);
+
+  }
+
+
+  /*
+   * 기록 내용의 첫 문장을 제목처럼 보여줍니다.
+   */
+  function getTitle(content) {
+
+    if (!content) {
+      return "제목 없는 기록";
+    }
+
+
+    const firstLine =
+      String(content)
+        .split("\n")
+        .find(line => line.trim() !== "");
+
+
+    if (!firstLine) {
+      return "제목 없는 기록";
+    }
+
+
+    return escapeHtml(
+      firstLine.trim().slice(0, 40)
+    );
+
+  }
+
+
+  /*
+   * 날짜를 보기 좋은 형태로 표시합니다.
+   */
+  function formatDate(value) {
+
+    if (!value) {
+      return "";
+    }
+
+
+    const date =
+      new Date(value);
+
+
+    if (isNaN(date.getTime())) {
+      return value;
+    }
+
+
+    return date.toLocaleDateString(
+      "ko-KR",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      }
+    );
+
+  }
+
+
+  /*
+   * HTML 특수문자를 안전하게 처리합니다.
+   */
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /*
+   * 검색 버튼을 클릭하면 검색합니다.
+   */
+  document
+    .getElementById("searchButton")
+    .addEventListener(
+      "click",
+      searchRecords
+    );
+
+
+  /*
+   * 검색창에서 Enter를 눌러도 검색합니다.
+   */
+  document
+    .getElementById("searchInput")
+    .addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Enter") {
+          searchRecords();
+        }
+
+      }
+    );
+
+
+  /*
+   * 페이지가 열리면 기록을 불러옵니다.
+   */
+  loadRecords();
+
+
+</script>
+
+</body>
+</html>

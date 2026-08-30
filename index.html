@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Morning Page 🍋</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+        "Noto Sans KR", sans-serif;
+      background: #FFFBEA;
+      color: #3E3A2F;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    textarea {
+      font-family: inherit;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #F2E8B8;
+      background: #FFFBEA;
+    }
+
+    .header-inner {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: #5D552F;
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    nav a {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #77705A;
+    }
+
+    nav a:hover {
+      background: #FFF3A8;
+    }
+
+    main {
+      padding: 50px 0 70px;
+    }
+
+    .welcome {
+      margin-bottom: 28px;
+    }
+
+    .welcome .small {
+      font-size: 14px;
+      color: #8C835F;
+      margin-bottom: 8px;
+    }
+
+    .welcome h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.3;
+      color: #393522;
+    }
+
+    .welcome h1 span {
+      color: #D7A900;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #F0E7BE;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 8px 30px rgba(109, 91, 20, 0.05);
+    }
+
+    .date {
+      font-size: 14px;
+      color: #8A825F;
+      margin-bottom: 18px;
+    }
+
+    .weather {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFF8CF;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .weather-icon {
+      font-size: 24px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #514B37;
+    }
+
+    .mood-list {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 30px;
+    }
+
+    .mood {
+      border: 1px solid #EEE7CA;
+      background: #FFFDF5;
+      border-radius: 16px;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .mood:hover {
+      transform: translateY(-3px);
+      background: #FFF6B8;
+    }
+
+    .mood.selected {
+      background: #FFE45C;
+      border-color: #E8C92C;
+      transform: translateY(-3px);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 280px;
+      border: 1px solid #EEE7CA;
+      border-radius: 18px;
+      padding: 18px;
+      resize: vertical;
+      font-size: 15px;
+      line-height: 1.8;
+      color: #4B4739;
+      background: #FFFDF8;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #E5C82F;
+      box-shadow: 0 0 0 3px rgba(255, 224, 75, 0.18);
+    }
+
+    .save-button {
+      width: 100%;
+      margin-top: 16px;
+      padding: 15px;
+      border: 0;
+      border-radius: 14px;
+      background: #F5D62F;
+      color: #514711;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .save-button:hover {
+      background: #EBCB1E;
+    }
+
+    .save-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .side-card {
+      margin-bottom: 20px;
+    }
+
+    .side-card h2 {
+      margin: 0 0 20px;
+      font-size: 18px;
+    }
+
+    .record-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #F0EBD8;
+    }
+
+    .record-item:last-child {
+      border-bottom: none;
+    }
+
+    .record-date {
+      font-size: 12px;
+      color: #9B9377;
+      margin-bottom: 7px;
+    }
+
+    .record-mood {
+      font-size: 20px;
+      margin-right: 6px;
+    }
+
+    .record-preview {
+      font-size: 13px;
+      color: #77715F;
+      line-height: 1.6;
+      margin-top: 7px;
+    }
+
+    .more-button {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #FFF8D9;
+      font-size: 13px;
+      color: #71683D;
+    }
+
+    .tip {
+      background: #FFF2A8;
+      border-radius: 20px;
+      padding: 22px;
+      line-height: 1.7;
+      font-size: 14px;
+      color: #655D39;
+    }
+
+    .tip strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #514A25;
+    }
+
+    .empty-message {
+      color: #999;
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      header {
+        height: auto;
+        padding: 18px 0;
+      }
+
+      nav {
+        gap: 2px;
+      }
+
+      nav a {
+        padding: 8px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 30px 0 50px;
+      }
+
+      .welcome h1 {
+        font-size: 27px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      .mood {
+        width: 38px;
+        height: 46px;
+        font-size: 21px;
+      }
+
+      textarea {
+        min-height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+
+    <a href="index.html" class="logo">🍋 Morning Page</a>
+
+    <nav>
+      <a href="index.html">오늘 쓰기</a>
+      <a href="calendar.html">달력</a>
+      <a href="records.html">기록</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <section class="welcome">
+      <div class="small" id="todayEnglish"></div>
+
+      <h1>
+        좋은 아침이에요.<br>
+        <span>오늘의 나</span>를 기록해보세요.
+      </h1>
+    </section>
+
+    <div class="layout">
+
+      <!-- 오늘의 기록 -->
+      <section class="card">
+
+        <div class="date" id="todayDate"></div>
+
+        <!-- 현재는 화면 확인용 -->
+        <div class="weather">
+          <span class="weather-icon">☀️</span>
+          <span>오늘의 날씨를 불러오는 중...</span>
+        </div>
+
+        <div class="section-title">
+          오늘의 기분은 어떤가요?
+        </div>
+
+        <div class="mood-list">
+          <button class="mood">😭</button>
+          <button class="mood">😣</button>
+          <button class="mood">😢</button>
+          <button class="mood">😞</button>
+          <button class="mood selected">😐</button>
+          <button class="mood">🙂</button>
+          <button class="mood">😊</button>
+          <button class="mood">😄</button>
+          <button class="mood">🤩</button>
+        </div>
+
+        <div class="section-title">
+          오늘 아침에는 어떤 생각이 드나요?
+        </div>
+
+        <textarea
+          id="content"
+          placeholder="지금 떠오르는 생각을 자유롭게 적어보세요.
+
+잘 써야 한다는 부담은 내려놓고,
+그냥 생각나는 대로 적어도 괜찮아요."
+        ></textarea>
+
+        <button class="save-button" id="saveButton">
+          오늘의 기록 저장하기
+        </button>
+
+      </section>
+
+      <!-- 최근 기록 -->
+      <aside>
+
+        <section class="card side-card">
+
+          <h2>최근 기록</h2>
+
+          <div id="recentRecords">
+            <div class="empty-message">
+              기록을 불러오는 중...
+            </div>
+          </div>
+
+          <a href="records.html" class="more-button">
+            모든 기록 보기 →
+          </a>
+
+        </section>
+
+        <div class="tip">
+          <strong>🍋 Morning Tip</strong>
+          완벽하게 쓰려고 하지 않아도 괜찮아요.
+          오늘 머릿속에 떠오르는 생각을 그대로 적어보세요.
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+
+<script>
+
+  /*
+   * Google Apps Script 웹앱 주소
+   */
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbwUo8rG3-Oi4dmg5gmwmil1rgMByuXf3VPEBpy308MFuy01gDEZLHJ3x8Qfuev8pTQUvQ/exec";
+
+
+  /*
+   * 오늘 날짜를 화면에 표시합니다.
+   */
+  function setToday() {
+
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+
+    const weekdays = [
+      "일요일",
+      "월요일",
+      "화요일",
+      "수요일",
+      "목요일",
+      "금요일",
+      "토요일"
+    ];
+
+    document.getElementById("todayDate").textContent =
+      `${year}년 ${month}월 ${day}일 ${weekdays[now.getDay()]}`;
+
+    document.getElementById("todayEnglish").textContent =
+      now.toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric"
+      });
+  }
+
+
+  /*
+   * 기분 이모지를 클릭했을 때 선택 상태를 변경합니다.
+   */
+  document.querySelectorAll(".mood").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      document.querySelectorAll(".mood").forEach(function(item) {
+        item.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+
+    });
+
+  });
+
+
+  /*
+   * Google 스프레드시트에서 모든 기록을 가져옵니다.
+   */
+  async function loadRecords() {
+
+    try {
+
+      const response = await fetch(API_URL);
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.error || "기록을 불러오지 못했습니다.");
+      }
+
+      displayRecentRecords(result.data);
+
+    } catch (error) {
+
+      console.error(error);
+
+      document.getElementById("recentRecords").innerHTML =
+        `<div class="empty-message">
+          기록을 불러오지 못했습니다.
+        </div>`;
+
+    }
+  }
+
+
+  /*
+   * 최근 기록 3개를 화면에 표시합니다.
+   */
+  function displayRecentRecords(records) {
+
+    const container =
+      document.getElementById("recentRecords");
+
+    if (!records || records.length === 0) {
+
+      container.innerHTML =
+        `<div class="empty-message">
+          아직 작성한 기록이 없어요.
+        </div>`;
+
+      return;
+    }
+
+    const recentRecords =
+      [...records].reverse().slice(0, 3);
+
+    container.innerHTML = recentRecords.map(function(record) {
+
+      const preview =
+        String(record.content || "")
+          .replace(/\n/g, " ")
+          .slice(0, 55);
+
+      return `
+        <div class="record-item">
+
+          <div class="record-date">
+            ${formatDate(record.date)}
+          </div>
+
+          <div>
+            <span class="record-mood">
+              ${record.mood || "😐"}
+            </span>
+          </div>
+
+          <div class="record-preview">
+            ${escapeHtml(preview)}
+            ${record.content && record.content.length > 55 ? "..." : ""}
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+  }
+
+
+  /*
+   * 날짜를 보기 좋은 형태로 바꿉니다.
+   */
+  function formatDate(dateValue) {
+
+    if (!dateValue) {
+      return "";
+    }
+
+    const date = new Date(dateValue);
+
+    if (isNaN(date.getTime())) {
+      return dateValue;
+    }
+
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+
+  }
+
+
+  /*
+   * HTML 특수문자를 안전하게 처리합니다.
+   */
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /*
+   * 새로운 기록을 Google 스프레드시트에 저장합니다.
+   */
+  async function saveRecord() {
+
+    const button =
+      document.getElementById("saveButton");
+
+    const content =
+      document.getElementById("content").value.trim();
+
+    const selectedMood =
+      document.querySelector(".mood.selected");
+
+    const mood =
+      selectedMood ? selectedMood.textContent : "😐";
+
+
+    if (!content) {
+
+      alert("오늘의 내용을 먼저 적어주세요 🍋");
+      return;
+
+    }
+
+
+    const today = new Date();
+
+    const date =
+      `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+
+    const data = {
+
+      date: date,
+
+      weather: "☀️ 맑음",
+
+      mood: mood,
+
+      content: content
+
+    };
+
+
+    button.disabled = true;
+    button.textContent = "저장하는 중...";
+
+
+    try {
+
+      /*
+       * CORS preflight를 피하기 위해
+       * Content-Type을 text/plain으로 보냅니다.
+       */
+      const response = await fetch(API_URL, {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "text/plain"
+        },
+
+        body: JSON.stringify(data)
+
+      });
+
+
+      const result = await response.json();
+
+
+      if (!result.success) {
+        throw new Error(
+          result.error || "저장에 실패했습니다."
+        );
+      }
+
+
+      alert("오늘의 기록이 저장되었습니다 🍋");
+
+
+      document.getElementById("content").value = "";
+
+      await loadRecords();
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "저장하지 못했습니다.\n\n" +
+        "Apps Script 배포 설정을 확인해주세요."
+      );
+
+    } finally {
+
+      button.disabled = false;
+      button.textContent = "오늘의 기록 저장하기";
+
+    }
+
+  }
+
+
+  /*
+   * 저장 버튼을 클릭하면 기록을 저장합니다.
+   */
+  document
+    .getElementById("saveButton")
+    .addEventListener("click", saveRecord);
+
+
+  /*
+   * 페이지가 열리면 날짜와 기존 기록을 불러옵니다.
+   */
+  setToday();
+  loadRecords();
+
+</script>
+
+</body>
+</html>
